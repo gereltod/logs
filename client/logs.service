@@ -1,0 +1,15 @@
+[Unit]
+Description="Docker compose logs"
+
+[Service]
+ExecStart=/usr/local/bin/node /home/log-docker/client.js
+#WorkingDirectory=/home/log-ssyte/
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=nodej-logs
+Environment=PROJECT=API URL=ws://34.84.208.3:83
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+ 
+  nginx:
+    build:
+      context: ./nginx      
+    restart: always
+    depends_on:
+      - server-logs
+      - server-logs1
+    ports:
+      - "83:83"
+    volumes:      
+      - "./html:/var/nginx/html"
+      - "./logs:/var/logs"
+
+  server-logs:
+    build: .
+    expose:
+      - "3000"
+    environment:      
+      - NAME=logs
+    volumes: 
+      - "./logs/logs:/root/.npm/_logs/"
+  
+  server-logs1:
+    build: .
+    expose:
+      - "3000"
+    environment:      
+      - NAME=logs1
+    volumes: 
+      - "./logs/logs1:/root/.npm/_logs/"
